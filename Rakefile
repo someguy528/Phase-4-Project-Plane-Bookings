@@ -3,4 +3,6 @@
 
 require_relative "config/application"
 
+Rake.application.options.trace = true
+
 Rails.application.load_tasks
