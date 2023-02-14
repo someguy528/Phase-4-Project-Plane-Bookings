@@ -15,8 +15,8 @@ dummy_products = [
 
 p "Creating Users..."
 
-dummy_usernames.each do |i|
-    User.create(username: i , password: "abcd1234" , password_confirmation: "abcd1234", name: dummy_names[i])
+5.times do |i|
+    User.create(username: dummy_usernames[i], password: "abcd1234" , password_confirmation: "abcd1234", name: dummy_names[i])
 end
 
 p "Creating Products..."
