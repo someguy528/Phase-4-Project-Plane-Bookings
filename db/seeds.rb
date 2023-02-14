@@ -3,15 +3,15 @@
 #
 # Examples:
 
-dummy_usernames = ["Jackie15", "Layton07", "Maria15", "Jill00" , "Ashley21"]
-dummy_names = ["Jackie", "Layton", "Maria", "Jill", "Ashley"]
-dummy_products = [
-    {name: "Potted Plant", description: "A nice plant", price: "15.00", available: true},
-    {name: "Hose 75ft", description: "A long hose", price: "34.99", available: true},
-    {name: "Metal Plate", description: "A metal plate of unknown uses", price: "19.99", available: true},
-    {name: "SSD 500gb", description: "This unknown brand SSD stores data", price: "79.99", available: true},
-    {name: "Rare Cd", description: "A hard to find cd", price: "119.99", available: false}
-]
+# dummy_usernames = ["Jackie15", "Layton07", "Maria15", "Jill00" , "Ashley21"]
+# dummy_names = ["Jackie", "Layton", "Maria", "Jill", "Ashley"]
+# dummy_products = [
+#     {name: "Potted Plant", description: "A nice plant", price: "15.00", available: true},
+#     {name: "Hose 75ft", description: "A long hose", price: "34.99", available: true},
+#     {name: "Metal Plate", description: "A metal plate of unknown uses", price: "19.99", available: true},
+#     {name: "SSD 500gb", description: "This unknown brand SSD stores data", price: "79.99", available: true},
+#     {name: "Rare Cd", description: "A hard to find cd", price: "119.99", available: false}
+# ]
 
 p "Creating Users..."
 
@@ -27,10 +27,16 @@ User.create(username: "Ashley21", password: "abcd1234" , password_confirmation: 
 p "Creating Products..."
 # new product seed
 
-User.first.products.create(dummy_products[0])
-User.second.products.create(dummy_products[1])
-User.third.products.create(dummy_products[2])
-User.fourth.products.create(dummy_products[3])
-User.fifth.products.create(dummy_products[4])
+# User.first.products.create(dummy_products[0])
+# User.second.products.create(dummy_products[1])
+# User.third.products.create(dummy_products[2])
+# User.fourth.products.create(dummy_products[3])
+# User.fifth.products.create(dummy_products[4])
+
+# User.first.products.create(name: "Potted Plant", description: "A nice plant", price: "15.00", available: true)
+# User.second.products.create(name: "Hose 75ft", description: "A long hose", price: "34.99", available: true)
+# User.third.products.create(name: "Metal Plate", description: "A metal plate of unknown uses", price: "19.99", available: true)
+# User.fourth.products.create(name: "SSD 500gb", description: "This unknown brand SSD stores data", price: "79.99", available: true)
+# User.fifth.products.create(name: "Rare Cd", description: "A hard to find cd", price: "119.99", available: false)
 
 
