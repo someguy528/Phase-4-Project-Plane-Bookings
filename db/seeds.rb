@@ -39,4 +39,10 @@ p "Creating Products..."
 # User.fourth.products.create(name: "SSD 500gb", description: "This unknown brand SSD stores data", price: "79.99", available: true)
 # User.fifth.products.create(name: "Rare Cd", description: "A hard to find cd", price: "119.99", available: false)
 
+Product.create(name: "Potted Plant", description: "A nice plant", price: "15.00", seller_id: 1, available: true)
+Product.create(name: "Hose 75ft", description: "A long hose", price: "34.99", seller_id: 2, available: true)
+Product.create(name: "Metal Plate", description: "A metal plate of unknown uses", price: "19.99", seller_id: 3, available: true)
+Product.create(name: "SSD 500gb", description: "This unknown brand SSD stores data", price: "79.99", seller_id: 4, available: true)
+Product.create(name: "Rare Cd", description: "A hard to find cd", price: "119.99", seller_id: 5, available: false)
+
 
