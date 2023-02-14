@@ -50,4 +50,3 @@ User.third.products.create(name: "Metal Plate", description: "A metal plate of u
 User.fourth.products.create(name: "SSD 500gb", description: "This unknown brand SSD stores data", price: "79.99", available: true)
 User.fifth.products.create(name: "Rare Cd", description: "A hard to find cd", price: "119.99", available: false)
 
-
