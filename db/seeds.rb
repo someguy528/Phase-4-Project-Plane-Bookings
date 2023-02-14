@@ -15,9 +15,14 @@ dummy_products = [
 
 p "Creating Users..."
 
-5.times do |i|
-    User.create(username: dummy_usernames[i], password: "abcd1234" , password_confirmation: "abcd1234", name: dummy_names[i])
-end
+# 5.times do |i|
+#     User.create(username: dummy_usernames[i], password: "abcd1234" , password_confirmation: "abcd1234", name: dummy_names[i])
+# end
+User.create(username: "Jackie15", password: "abcd1234" , password_confirmation: "abcd1234", name: "Jackie")
+User.create(username: "Layton07", password: "abcd1234" , password_confirmation: "abcd1234", name: "Layton")
+User.create(username: "Maria15", password: "abcd1234" , password_confirmation: "abcd1234", name: "Maria")
+User.create(username: "Jill00", password: "abcd1234" , password_confirmation: "abcd1234", name: "Jill")
+User.create(username: "Ashley21", password: "abcd1234" , password_confirmation: "abcd1234", name: "Ashley")
 
 p "Creating Products..."
 # new product seed
