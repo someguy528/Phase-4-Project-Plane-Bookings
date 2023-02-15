@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-    belongs_to :seller, class_name: 'User', foreign_key: :seller_id, required: true
+    belongs_to :seller, class_name: 'User', foreign_key: :seller_id
     has_many :cart_items
     has_many :carts, through: :cart_items 
 
