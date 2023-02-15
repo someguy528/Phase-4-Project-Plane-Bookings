@@ -6,10 +6,10 @@ class Api::UsersController < ApplicationController
         session[:user_id] = user.id
         render json: user, status: :created
     end
-    def index
-        users = User.all
-        render json: users 
-    end
+    # def index
+    #     users = User.all
+    #     render json: users 
+    # end
     def show
         render json: @user
     end

@@ -1,3 +1,9 @@
+# Phase 4 Project
+
+This project was done as a test for deployment version of the Phase 4 Project for Flatiron School which has products that can be added to a cart when a user is signed in and features user and password creation by bcrypt, validations, password authentications, and various authorizations.  The old test version done with sqlite3 for sole development is located here: https://github.com/someguy528/Test-variant-phase-4-project.  One change between the completed new project and the old project was removing the 'price_total' column of the 'carts' table in favor of serializing the 'price_total' by a backend calculation of 'cart_item' quantities and associated prices of 'products' on a get request.  Additional code was written on product edits to keep track of changes in prices and product attributes in the cart.
+
+Jack Moore's solution for rounding to decimal places without losing trailing zeros in JavaScript: http://www.jacklmoore.com/notes/rounding-in-javascript/
+
 # Project Template: React/Rails API
 
 ## Description

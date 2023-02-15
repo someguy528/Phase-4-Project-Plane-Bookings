@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   
   namespace :api do
-    resources :carts do
-      resources :cart_items
+    resources :carts, only: [:show, :destroy] do
+      resources :cart_items, except: [:index, :show] 
     end
     resources :products
-    resources :users
+    resources :users, only: [:create, :show]
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
   end

@@ -1,18 +1,17 @@
 import { useContext, useEffect, useState } from "react"
-import { Redirect, Route, Switch, useRouteMatch, useHistory } from "react-router-dom"
+import { Redirect, Route, Switch, useRouteMatch} from "react-router-dom"
 import { UserContext } from "../components/context/UserContext"
 import CartItemListing from "../components/CartItemListing"
 import CartItemDetails from "./CartItemDetails"
 
 function CartPage({cart, setCart, fetchCartUser}){
     const [errors,setErrors] = useState([])
-    const history = useHistory()
     const {user} = useContext(UserContext)
     const {url} = useRouteMatch()
 
     function handleCartItemEdit(changedItem){
         let newCart = {...cart,
-            price_total: parseFloat(parseFloat(cart.price_total) + (changedItem.product.price * (changedItem.quantity - cart.cart_items.find(ci=>ci.id === changedItem.id).quantity))).toFixed(2), 
+            price_total: (parseFloat(cart.price_total) + (changedItem.product.price * (changedItem.quantity - cart.cart_items.find(ci=>ci.id === changedItem.id).quantity))).toFixed(2), 
 
             cart_items: cart.cart_items.map(ci=>{
                     if(ci.id === changedItem.id ){
@@ -38,7 +37,6 @@ function CartPage({cart, setCart, fetchCartUser}){
         }).then(resp=>{
             if(resp.ok){
                 fetchCartUser()
-                // history.push("/")
             }
             else{resp.json().then(error=>setErrors(error.errors))}
         })
