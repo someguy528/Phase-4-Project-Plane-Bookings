@@ -31,6 +31,9 @@ function App() {
                 }else return ci
             })
         }
+        if(!parseFloat(newData.price_total[newData.price_total.length-2])){
+          newData.price_total = newData.price_total + "0"
+        }
         setCart(newData)
       })}
         else{setCart(false)}
