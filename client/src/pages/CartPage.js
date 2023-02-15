@@ -5,6 +5,7 @@ import CartItemListing from "../components/CartItemListing"
 import CartItemDetails from "./CartItemDetails"
 
 function CartPage({cart, setCart, fetchCartUser}){
+    const [errors,setErrors] = useState([])
     const history = useHistory()
     const {user} = useContext(UserContext)
     const {url} = useRouteMatch()
@@ -25,7 +26,7 @@ function CartPage({cart, setCart, fetchCartUser}){
     function handleCartItemDelete(deletedItem){
         let newCart = {
             ...cart,
-            price_total: parseFloat(parseFloat(cart.price_total) - (deletedItem.product.price * deletedItem.quantity )).toFixed(2),
+            price_total: (parseFloat(cart.price_total) - (deletedItem.product.price * deletedItem.quantity )).toFixed(2),
             cart_items: cart.cart_items.filter(ci=> ci.id !== deletedItem.id )
         }
         setCart(newCart)
@@ -39,6 +40,7 @@ function CartPage({cart, setCart, fetchCartUser}){
                 fetchCartUser()
                 // history.push("/")
             }
+            else{resp.json().then(error=>setErrors(error.errors))}
         })
     }
 
@@ -59,6 +61,9 @@ function CartPage({cart, setCart, fetchCartUser}){
                     {cart.cart_items.length > 0 ? "Cart Items:" : "You have no Cart Items!" }
                     {allCartItems}
                     {cart.cart_items.length > 0 ? `Cart Total: $${cart.price_total}` : null }
+                    {errors.map(error => {
+                        return (<header key={error} >{error}</header>)
+                    })}
                    
                 </Route>
                 <Route exact path={`${url}/:cartId/cart_items/:cartItemId`} >

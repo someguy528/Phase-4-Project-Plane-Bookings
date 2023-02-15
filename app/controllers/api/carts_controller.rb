@@ -11,9 +11,13 @@ class Api::CartsController < ApplicationController
     def destroy
         # cart = @user.carts.find_by(status: "open")
         cart = Cart.find_by(id: params[:id])
-        cart.destroy
-        @user.carts.create!(new_cart_hash)
-        head :no_content
+        if cart.cart_items.length > 0
+            cart.destroy
+            @user.carts.create!(new_cart_hash)
+            head :no_content
+        else
+            render json: {errors: ["Theres nothing in the Cart!"]}, status: :unauthorized
+        end
     end
 
     private

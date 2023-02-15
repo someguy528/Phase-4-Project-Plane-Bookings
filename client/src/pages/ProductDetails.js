@@ -16,8 +16,8 @@ function ProductDetails({products, cart, onProductDelete, onCartItemAdd}){
             method: "DELETE"
         }).then(resp=>{
             if(resp.ok){
-                onProductDelete(product);
                 history.push(`${url.replace(`/${productId}`,"")}`)
+                onProductDelete(product);
             }else{
                 resp.json().then(error=>setErrors(error.errors))
             }
@@ -41,7 +41,7 @@ function ProductDetails({products, cart, onProductDelete, onCartItemAdd}){
                 resp.json().then((data)=>{
                 onCartItemAdd(data);
                 console.log(data);
-                history.push("/cart")})
+                history.push("/carts")})
             }else{
                 resp.json().then(error=> setErrors(error.errors))
             }
@@ -53,27 +53,21 @@ function ProductDetails({products, cart, onProductDelete, onCartItemAdd}){
     })
 
 
-    let userIsSeller = null
-    if(user !== false && product.seller.id === user.id){
-        userIsSeller = (<div>
+    let userIsSeller = user !== false && product.seller.id === user.id ?
+        (<div>
             <button onClick={handleDeleteClick} >Remove Listing</button> 
             <p> <Link to={`${url}/edit`} >Edit Product</Link>  </p>
-        </div>)
-    }
+        </div>) : null
 
+    let addToCartBtn = user !== false ? 
+        (<button onClick={handleCartItemAddClick} > Add To Cart </button>)
+        : ( <button>Login to add!</button> ) 
 
-    let addToCartBtn = null
-    if(user !== false){
-        addToCartBtn = (<button onClick={handleCartItemAddClick} > Add To Cart </button>)
-    }else{ addToCartBtn = ( <button>Login to add!</button> ) }
-
-    let quantityAvailable = null
-    if(product.available){
-        quantityAvailable = (<div>
-            <label>Select Quantity:</label>
+    let quantityAvailable = product.available ? 
+        (<div> <label>Select Quantity:</label>
             <select value={cartItemQuantity} onChange={handleCartItemQuantityChange} >{quantity}</select> 
             {addToCartBtn} </div>) 
-    } else{quantityAvailable = (<p>"Unfortunately Unavailable!"</p>)}
+            : (<p>"Unfortunately Unavailable!"</p>)
     
     return(
         <section>

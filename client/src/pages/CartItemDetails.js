@@ -39,8 +39,8 @@ function CartItemDetails({cart, onCartItemEdit, onCartItemDelete}){
             method: "DELETE"
         }).then(resp=>{
             if(resp.ok){
-                onCartItemDelete(cartItem)
                 history.push(`${url.replace(`/${cart.id}/cart_items/${cartItemId}`,"")}`)
+                onCartItemDelete(cartItem)
             }
         })
     }

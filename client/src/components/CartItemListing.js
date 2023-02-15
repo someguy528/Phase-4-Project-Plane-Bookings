@@ -7,7 +7,8 @@ function CartItemListing({cartItem}){
     const cartItemClick = () => history.push(`${url}/${cartItem.cart_id}/cart_items/${cartItem.id}`)
     return (
         <div onClick={cartItemClick} >
-            <h4>{cartItem.product.name}  Quantity# {cartItem.quantity} : ${parseFloat(cartItem.quantity * cartItem.product.price).toFixed(2)}</h4>   
+            <h4>{cartItem.product.available?null:"(Unavailable!)"}
+            {cartItem.product.name}  Quantity# {cartItem.quantity} : ${parseFloat(cartItem.quantity * cartItem.product.price).toFixed(2)}</h4>   
         </div>
     )
 }

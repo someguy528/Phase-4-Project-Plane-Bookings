@@ -21,15 +21,6 @@ function App() {
     .then(resp=>{
         if(resp.ok){
         resp.json().then(data=>{
-        // const formatCartItemData = data.cart_items.map(ci=>{
-        //     console.log(ci)
-        //     if(!parseFloat(ci.product.price[ci.product.price.length-2])){
-        //         ci.product.price = ci.product.price + "0"
-        //         return ci
-        //     }else return ci
-        // })
-        // data.cart_items = formatCartItemData
-        // setCart(data)
         let newData = {
           ...data,
           cart_items: data.cart_items.map(ci=>{
@@ -40,33 +31,10 @@ function App() {
                 }else return ci
             })
         }
-        // newData.price_total = newData.cart_items.map(ci=>ci.quantity * ci.product.price).reduce((a,b)=>a+b).toFixed(2)
         setCart(newData)
       })}
         else{setCart(false)}
     })
-  }
-
-  function handleCartItemAdd(newCartItem){
-    if(cart.cart_items.some(ci=>ci.id === newCartItem.id)){
-      const newCart = {
-      ...cart,
-      price_total: parseFloat(parseFloat(cart.price_total) + (newCartItem.product.price * (newCartItem.quantity - cart.cart_items.find(ci=>ci.id === newCartItem.id).quantity))).toFixed(2), 
-      cart_items: cart.cart_items.map(ci=>{
-        if(ci.id === newCartItem.id){
-          return newCartItem
-        }else return ci
-      })
-    }
-    setCart(newCart)
-    }
-    else{const newCart = {
-      ...cart,
-      price_total: parseFloat(parseFloat(cart.price_total) + (newCartItem.product.price * newCartItem.quantity)).toFixed(2),
-      cart_items: [...cart.cart_items , newCartItem ]
-    }
-    setCart(newCart)
-  }
   }
 
   useEffect(()=>{
@@ -99,9 +67,9 @@ function App() {
           <NewUser fetchCartUser={fetchCartUser} />
         </Route>
         <Route path="/products" >
-          <ProductsPage cart={cart} products={products} setProducts={setProducts} onCartItemAdd={handleCartItemAdd} />
+          <ProductsPage cart={cart} setCart={setCart} products={products} setProducts={setProducts}  />
         </Route>
-        <Route path="/cart"  >
+        <Route path="/carts"  >
           <CartPage cart={cart} setCart={setCart} fetchCartUser={fetchCartUser} />
         </Route>
         <Route exact path="/" >
@@ -116,20 +84,3 @@ function App() {
 
 export default App;
 
-
-
-
-// import './App.css';
-
-// function App() {
-
-
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
