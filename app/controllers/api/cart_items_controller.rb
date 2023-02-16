@@ -7,12 +7,16 @@ class Api::CartItemsController < ApplicationController
         else
             # render json: {errors: ["Item is already in Cart!"]}, status: :unauthorized
             cart_item = cart.cart_items.find_by(product_id: params[:product_id])
-            cart_item.update!(quantity: cart_item[:quantity] + params[:quantity])
-            render json: cart_item, include: ["product" , "product.seller"]
+            unless cart_item[:quantity] + params[:quantity] > 10
+                cart_item.update!(quantity: cart_item[:quantity] + params[:quantity])
+                render json: cart_item, include: ["product" , "product.seller"]
+            else
+                render json: {errors: ["Quantity can't exceed 10 in cart!"]}, status: :unauthorized
+            end
         end
     end
     def update
-        cart_item = CartItem.find_by(id: params[:id])
+        cart_item = @user.cart_items.find_by(id: params[:id])
         if cart_item.quantity != params[:quantity]
             cart_item.update!(cart_item_update_params)
             render json: cart_item, include: ["product" , "product.seller"]
@@ -21,7 +25,7 @@ class Api::CartItemsController < ApplicationController
         end
     end
     def destroy
-        cart_item = CartItem.find_by(id: params[:id])
+        cart_item = @user.cart_items.find_by(id: params[:id])
         if cart_item
             cart_item.destroy
             head :no_content

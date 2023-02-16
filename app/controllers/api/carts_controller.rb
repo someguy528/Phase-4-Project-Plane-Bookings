@@ -11,7 +11,7 @@ class Api::CartsController < ApplicationController
     def destroy
         # cart = @user.carts.find_by(status: "open")
         cart = Cart.find_by(id: params[:id])
-        if cart.cart_items.length > 0
+        if cart.cart_items.length > 0 && cart.buyer_id == @user.id
             cart.destroy
             @user.carts.create!(new_cart_hash)
             head :no_content
