@@ -18,6 +18,9 @@ function ProductEdit({products, onProductEdit}){
     const [errors , setErrors] = useState([])
     function handleEditProductChange(e){
         let value = e.target.value
+        if(e.target.name === "available"){
+            value = value === "true" ? true : false
+        } 
         setEditProduct({
             ...editProduct, 
             [e.target.name] : value
@@ -66,7 +69,7 @@ function ProductEdit({products, onProductEdit}){
                 <p>Product Available?</p>
                 <select name="available" value={editProduct.available} onChange={handleEditProductChange} >
                     <option value={true} >Yes</option>
-                    <option value={""} >No</option>
+                    <option value={false} >No</option>
                 </select>
                 <p>Description</p>
                 <textarea type="text" name="description" value={editProduct.description} onChange={handleEditProductChange}
