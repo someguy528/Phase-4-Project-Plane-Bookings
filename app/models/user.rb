@@ -3,7 +3,8 @@ class User < ApplicationRecord
 
     has_many :products, foreign_key: :seller_id
     has_many :carts, foreign_key: :buyer_id
-    has_many :cart_items, through: :carts
+    has_many :cart_items, through: :carts, foreign_key: :buyer_id
+    has_many :bought_products, through: :cart_items, source: :product
 
     validates :username, :name, :password, :password_confirmation, :name, presence: true
     validates :username, uniqueness: {scope: :username}, length: {in: 4..20, message: "is 4-20 characters" }, format: { with: /\A[a-zA-Z\d]{4,20}\z/, message: "can only consists of letters and numbers" }

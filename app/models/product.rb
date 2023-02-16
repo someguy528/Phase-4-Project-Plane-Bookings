@@ -2,6 +2,7 @@ class Product < ApplicationRecord
     belongs_to :seller, class_name: 'User', foreign_key: :seller_id
     has_many :cart_items
     has_many :carts, through: :cart_items 
+    has_many :buyers, through: :carts
 
     validates :seller_id, :name, :description, :price, presence: true
     validates :name, length: {in: 4..30}, format: {with: /\A[a-zA-Z\d]+([:]{0,1}[ \-]{1}[a-zA-Z\d]+)*\z/}, uniqueness: {scope: :name}
