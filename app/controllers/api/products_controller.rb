@@ -15,8 +15,8 @@ class Api::ProductsController < ApplicationController
             render json: product
         end
         def update
-            product = Product.find(params[:id])
-            if @user.id == product[:seller_id]
+            product = @user.products.find_by(id: params[:id])
+            if product
                 product.update!(product_update_params)
                 render json: product
             else
@@ -25,8 +25,8 @@ class Api::ProductsController < ApplicationController
         end
 
         def destroy 
-            product = Product.find(params[:id])
-            if @user.id == product[:seller_id]
+            product = @user.products.find_by(id: params[:id])
+            if product
                 unless CartItem.find_by(product_id: params[:id])
                     product.destroy
                     head :no_content
