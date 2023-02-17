@@ -1,8 +1,6 @@
 class Api::ProductsController < ApplicationController
     skip_before_action :authorize, only: [:index, :show]
         def create
-            # product = Product.create!(product_params)
-            # render json: product, status: :created
             product = @user.products.create!(product_params)
             render json: product, status: :created
         end

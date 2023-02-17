@@ -3,17 +3,18 @@ class Api::CartsController < ApplicationController
     def show 
         cart = @user.carts.find_by(status: "open")
         if !cart
-            cart = @user.carts.create!(new_cart_hash)
+            # cart = @user.carts.create!(new_cart_hash)
+            cart = @user.carts.new_cart
         end
-        # cart.price_total_update
         render json: cart, include: ["cart_items" , "cart_items.product", "cart_items.product.seller"]
     end
     def destroy
         # cart = @user.carts.find_by(status: "open")
-        cart = Cart.find_by(id: params[:id])
+        cart = @user.carts.find_by(id: params[:id])
         if cart.cart_items.length > 0 && cart.buyer_id == @user.id
             cart.destroy
-            @user.carts.create!(new_cart_hash)
+            # @user.carts.create!(new_cart_hash)
+            @user.carts.new_cart
             head :no_content
         else
             render json: {errors: ["Theres nothing in the Cart!"]}, status: :unauthorized
