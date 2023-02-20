@@ -4,9 +4,9 @@ class Cart < ApplicationRecord
     has_many :products, through: :cart_items
 
     validates :buyer_id, :status, presence: true
-    def new_cart
+    def self.new_cart(buyer_id:)
         self.create!({
-            buyer_id: self.buyer_id,
+            buyer_id: buyer_id,
             status: "open"
         })
     end

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     end
     resources :products
     resources :users, only: [:create, :show]
+
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
   end
@@ -14,3 +15,6 @@ Rails.application.routes.draw do
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end
+    # resources :users, only: [:create, :show] do
+    # resources :products, only: [:index]
+    # end

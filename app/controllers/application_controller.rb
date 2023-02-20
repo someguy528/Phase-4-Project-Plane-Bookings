@@ -17,3 +17,5 @@ class ApplicationController < ActionController::API
     end
 
 end
+        # demo testing eager loading with .includes
+        # @user = User.includes(:products, carts:{cart_items: [:product]}).find_by(id: session[:user_id])
