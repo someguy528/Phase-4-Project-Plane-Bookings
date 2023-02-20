@@ -33,7 +33,7 @@ function NavBar({setCart}){
         <section>
         <NavLink to="/" > Home </NavLink>
         <NavLink to="/products" >Products</NavLink>
-        <NavLink to="/carts" >Cart</NavLink>
+        <NavLink to="/cart" >Cart</NavLink>
         {/* <NavLink to="/account" > Account </NavLink> */}
         <button onClick={handleLogout}> Logout </button>
         </section>

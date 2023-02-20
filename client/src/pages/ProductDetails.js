@@ -41,7 +41,7 @@ function ProductDetails({products, cart, onProductDelete, onCartItemAdd}){
                 resp.json().then((data)=>{
                 onCartItemAdd(data);
                 console.log(data);
-                history.push("/carts")})
+                history.push("/cart")})
             }else{
                 resp.json().then(error=> setErrors(error.errors))
             }

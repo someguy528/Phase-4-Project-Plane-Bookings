@@ -1,14 +1,19 @@
-import { useParams, Link, useRouteMatch, useHistory } from "react-router-dom"
+import { useParams, Link, useRouteMatch, useHistory, Redirect } from "react-router-dom"
 import {useState} from "react"
 
 function CartItemDetails({cart, onCartItemEdit, onCartItemDelete}){
     const history = useHistory()
     const {url} = useRouteMatch()
     const {cartItemId} = useParams()
+
+    if(!cart.cart_items.some(item => item.id === parseInt(cartItemId))){
+        history.push("/cart")
+    } 
+
     const cartItem = cart.cart_items.find(item => item.id === parseInt(cartItemId))
-    
     const [quantity, setQuantity] = useState(cartItem.quantity)
     const [errors , setErrors] = useState([])
+
     function handleQuantityChange(e){
         setQuantity(parseInt(e.target.value))
     }
@@ -39,7 +44,8 @@ function CartItemDetails({cart, onCartItemEdit, onCartItemDelete}){
             method: "DELETE"
         }).then(resp=>{
             if(resp.ok){
-                history.push(`${url.replace(`/${cart.id}/cart_items/${cartItemId}`,"")}`)
+                // history.push(`${url.replace(`/${cart.id}/cart_items/${cartItemId}`,"")}`)
+                history.push("/cart")
                 onCartItemDelete(cartItem)
             }
         })
@@ -63,7 +69,8 @@ function CartItemDetails({cart, onCartItemEdit, onCartItemDelete}){
         {errors.map(error => {
                 return (<header key={error} >{error}</header>)
             })}
-        <p> <Link to={`${url.replace(`/${cart.id}/cart_items/${cartItemId}`,"")}`} >Go Back</Link>  </p>
+        {/* <p> <Link to={`${url.replace(`/${cart.id}/cart_items/${cartItemId}`,"")}`} >Go Back</Link>  </p> */}
+        <p> <Link to={"/cart"} >Go Back</Link>  </p>
     </section>
     )
 }

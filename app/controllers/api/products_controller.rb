@@ -13,18 +13,26 @@ class Api::ProductsController < ApplicationController
             render json: product
         end
         def update
-            product = @user.products.find(params[:id])
-            product.update!(product_update_params)
-            render json: product
+            product = @user.products.find_by(id: params[:id])
+            if product
+                product.update!(product_update_params)
+                render json: product
+            else
+                render json: {error: ["Unauthorized Access"]}, status: :unauthorized
+            end
         end
 
         def destroy 
-            product = @user.products.find(params[:id])
-            unless CartItem.find_by(product_id: params[:id])
-                product.destroy
-                head :no_content
-            else 
-                render json: {errors: ["Product exists in someone's cart!"]}, status: :unauthorized
+            product = @user.products.find_by(id: params[:id])
+            if product
+                unless CartItem.find_by(product_id: params[:id])
+                    product.destroy
+                    head :no_content
+                else 
+                    render json: {errors: ["Product exists in someone's cart!"]}, status: :unauthorized
+                end
+            else
+                render json: {error: ["Unauthorized Access"]}, status: :unauthorized
             end
         end
         private

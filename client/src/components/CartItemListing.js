@@ -4,7 +4,7 @@ function CartItemListing({cartItem}){
         console.log(cartItem)
     const history = useHistory()
     const {url} = useRouteMatch()
-    const cartItemClick = () => history.push(`${url}/${cartItem.cart_id}/cart_items/${cartItem.id}`)
+    const cartItemClick = () => history.push(`${url}/cart_items/${cartItem.id}`)
     return (
         <div onClick={cartItemClick} >
             <h4>{cartItem.product.available?null:"(Unavailable!)"}

@@ -64,7 +64,8 @@ function CartPage({cart, setCart, fetchCartUser}){
                     })}
                    
                 </Route>
-                <Route exact path={`${url}/:cartId/cart_items/:cartItemId`} >
+                {/* <Route exact path={`${url}/:cartId/cart_items/:cartItemId`} > */}
+                <Route exact path={`${url}/cart_items/:cartItemId`} >
                     <CartItemDetails cart={cart} onCartItemEdit={handleCartItemEdit} onCartItemDelete={handleCartItemDelete} />
                 </Route>
             </Switch>

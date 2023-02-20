@@ -72,7 +72,7 @@ function App() {
         <Route path="/products" >
           <ProductsPage cart={cart} setCart={setCart} products={products} setProducts={setProducts}  />
         </Route>
-        <Route path="/carts"  >
+        <Route path="/cart"  >
           <CartPage cart={cart} setCart={setCart} fetchCartUser={fetchCartUser} />
         </Route>
         <Route exact path="/" >

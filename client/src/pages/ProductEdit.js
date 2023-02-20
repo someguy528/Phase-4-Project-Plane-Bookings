@@ -7,8 +7,10 @@ function ProductEdit({products, onProductEdit}){
     const history = useHistory()
     const {productId} = useParams()
     const {user} = useContext(UserContext)
-    if(user === false){history.push(`${url.replace("/edit","")}`)}
+
     const product = products.find(p => p.id === parseInt(productId))
+    if(user === false || user.id !== product.seller.id ){history.push(`${url.replace("/edit","")}`)}
+
     const [editProduct, setEditProduct] = useState({
         name: product.name,
         description: product.description, 
